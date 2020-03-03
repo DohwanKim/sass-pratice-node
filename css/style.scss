@@ -1,0 +1,117 @@
+// 중첩 nesting
+.main__gird {
+  background-color: aqua;
+  width: 300px;
+
+  .row {
+    color: white;
+    width: 200px;
+    background-color: blue;
+  }
+}
+
+.main__border {
+  height: 100px;
+  width: 100px;
+  color: blueviolet;
+
+  border: {
+    style: solid;
+    left: {
+      width: .1rem;
+      color: blue;
+    }
+    right: {
+      width: .2rem;
+      color: black;
+    }
+  }
+}
+
+// 부모 앨리먼트 참조 -> &
+.main__hover {
+  background-color: aqua;
+  height: 100px;
+  width: 100px;
+  color: #ce4dd6;
+  &:hover {
+    color: #ffb3ff;
+    background-color: blue;
+  }
+  &:visited {
+    color: #c458cb;
+  }
+}
+
+
+// 변수
+$main-color : #ce4dd6;
+$style: solid;
+
+.main__variables {
+  width: 100px;
+  height: 100px;
+
+  border: {
+    color: $style;
+    style: solid;
+  };
+
+  &:hover {
+    background-color: $main-color;
+  }
+}
+
+// 연산자와 함수
+$right-height : 300px;
+
+.main__operation-func {
+  .left {
+    background-color:
+      lighten($main-color, 10%);
+    height: $right-height / 2;
+  }
+  .right {
+    background-color: aqua;
+    height: $right-height;
+  }
+}
+
+//mixin
+@mixin main__mixin {
+  $side: top;
+  $radius: 10px;
+
+  border: {
+    style: solid;
+    color: #d976e0;
+    width: 1px;
+  };
+
+  border-#{$side}-radius: $radius;
+  -moz-border-radius-#{$side}: $radius;
+  -webkit-border-#{$side}-radius: $radius;
+}
+
+.main__copy-mix { @include main__mixin; }
+.main__copy-mix2 { @include main__mixin; }
+
+//mixin arguments
+@mixin rounded($side, $radius: 10px) {
+  border: {
+    style: solid;
+    color: #d976e0;
+    width: 1px;
+  };
+
+  border-#{$side}-radius: $radius;
+  -moz-border-radius-#{$side}: $radius;
+  -webkit-border-#{$side}-radius: $radius;
+}
+
+.main__arg-copy-mix { @include rounded(top); }
+.main__arg-copy-mix2 { @include rounded(top, 5px); }
+.main__arg-copy-mix3 { @include rounded(left, 8px); }
+
+//import
+@import "rounded";
